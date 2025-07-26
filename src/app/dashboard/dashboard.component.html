@@ -1,1 +1,11 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <h1>Dashboard</h1>
+  <div class="areas-grid">
+    <app-area-button 
+      *ngFor="let area of areas" 
+      [area]="area"
+      [isSelected]="selectedAreaId === area.id"
+      (areaClicked)="onAreaClick(area.id)">
+    </app-area-button>
+  </div>
+</div>
