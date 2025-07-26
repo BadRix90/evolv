@@ -1,11 +1,26 @@
 <div class="dashboard">
-  <h1>Dashboard</h1>
-  <div class="areas-grid">
-    <app-area-button 
-      *ngFor="let area of areas" 
-      [area]="area"
-      [isSelected]="selectedAreaId === area.id"
-      (areaClicked)="onAreaClick(area.id)">
-    </app-area-button>
+  <div class="dashboard-header">
+    <h1>Evolv</h1>
+    <p class="subtitle">Grow your life, Gently.</p>
+  </div>
+
+  <div class="circle-dashboard">
+    <div class="center-circle">
+      <h2>Life</h2>
+      <p>Compass</p>
+    </div>
+    
+    <div 
+      *ngFor="let area of areas; let i = index" 
+      class="pizza-slice"
+      [class.selected]="selectedAreaId === area.id"
+      [style.background-color]="area.color"
+      [style.transform]="'rotate(' + (i * 45) + 'deg)'"
+      (click)="onAreaClick(area.id)">
+      
+      <div class="area-content" [style.transform]="'rotate(' + (-i * 45) + 'deg)'">
+        <span class="area-name">{{ area.name }}</span>
+      </div>
+    </div>
   </div>
 </div>
