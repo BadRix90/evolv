@@ -4,23 +4,37 @@
     <p class="subtitle">Grow your life, Gently.</p>
   </div>
 
-  <div class="circle-dashboard">
-    <div class="center-circle">
+  <div class="circle-container">
+    <svg width="400" height="400" viewBox="0 0 400 400">
+      <!-- SVG Pizza Slices -->
+      <g *ngFor="let area of areas; let i = index">
+        <path 
+          [attr.d]="getSlicePath(i)"
+          [attr.fill]="area.color"
+          [class.selected]="selectedAreaId === area.id"
+          class="pizza-slice"
+          (click)="onAreaClick(area.id)">
+        </path>
+        
+        <!-- Text Labels -->
+        <text 
+          [attr.x]="getTextX(i)"
+          [attr.y]="getTextY(i)"
+          [attr.text-anchor]="getTextAnchor(i)"
+          class="area-text"
+          (click)="onAreaClick(area.id)">
+          {{ area.name }}
+        </text>
+      </g>
+      
+      <!-- Center Circle -->
+      <circle cx="200" cy="200" r="60" fill="white" stroke="#ddd" stroke-width="1"></circle>
+    </svg>
+    
+    <!-- Center Text -->
+    <div class="center-text">
       <h2>Life</h2>
       <p>Compass</p>
-    </div>
-    
-    <div 
-      *ngFor="let area of areas; let i = index" 
-      class="pizza-slice"
-      [class.selected]="selectedAreaId === area.id"
-      [style.background-color]="area.color"
-      [style.transform]="'rotate(' + (i * 45) + 'deg)'"
-      (click)="onAreaClick(area.id)">
-      
-      <div class="area-content" [style.transform]="'rotate(' + (-i * 45) + 'deg)'">
-        <span class="area-name">{{ area.name }}</span>
-      </div>
     </div>
   </div>
 </div>
